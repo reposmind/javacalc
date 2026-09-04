@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         boolean work = true;
+        ArrayList<Double> history = new ArrayList<>();
 
         while (work) {
             System.out.println("Welcome to the super puper calculator!");
@@ -46,16 +48,22 @@ public class Main {
 
             if (validOp) {
                 System.out.printf("Result is: %.2f%n", result);
+                history.add(result);
             }
 
-            System.out.print("Start again? (1 = Yes / 0 = No): ");
+            System.out.print("Start again? (1 = Yes / 0 = No / 3 = Show History): ");
             int choice = scan.nextInt();
 
             if (choice == 0) {
                 work = false;
                 System.out.println("Goodbye!");
             }
-            // Entering 1 naturally loops back around without hitting a return statement
+            else if (choice == 3) {
+                System.out.println("History:");
+                for (int i = 0; i < history.size(); i++) {
+                    System.out.println(i + 1 + ": " + history.get(i));
+                }
+            }
         }
 
         scan.close();
